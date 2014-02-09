@@ -4,23 +4,71 @@
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 	<script src="http://cwilso.github.io/AudioContext-MonkeyPatch/AudioContextMonkeyPatch.js"></script>
 	<script src="/js/client_color_sound.js"></script>
-<style>
-#num { font-size: 164px; }
-#num { display: inline-block; height:180px; text-align: left;}
-#val { font-size: 164px; }
-#val { display: inline-block; height:180px; text-align: left;}
+<style type="text/css">
+	.demo-pricing {
+		margin-top: 200px;
+		float: center;
+		padding: 14px 40px;
+		font-size: 100px;
+		line-height: 100%;
+		text-shadow: 0 1px rgba(0, 0, 0, 0.4);
+		color: #fff;
+		display:inline-block;
+		vertical-align: middle;
+		text-align: center;
+		cursor: pointer;
+		transition: background 0.1s ease-in-out;
+		-webkit-transition: background 0.1s ease-in-out;
+		-moz-transition: background 0.1s ease-in-out;
+		-ms-transition: background 0.1s ease-in-out;
+		-o-transition: background 0.1s ease-in-out;
+		text-shadow: 0 1px rgba(0, 0, 0, 0.3);
+		color: #fff;
+		-webkit-border-radius: 30px;
+		-moz-border-radius: 30px;
+		border-radius: 30px;
+		font-family: 'HelveticaNeue-UltraLight', 'Helvetica Neue UltraLight', 'Helvetica Neue', Arial, Helvetica, sans-serif; font-weight: 100; letter-spacing: 1px;
+	}
+	.demo-pricing:active {
+
+	     margin-bottom: -10px;
+	}
+	.demo-pricing, .demo-pricing:hover, .demo-pricing:active {
+		outline: 0 none;
+		text-decoration: none;
+		color: #fff;
+	}
+
+	.demo-pricing-1 {
+		background-color: #3fb8e8;
+		box-shadow: 0px 15px 0px 0px #3293ba;
+	}
+	.demo-pricing-1:hover {
+		background-color: #1baae3;
+		-webkit-opacity: 1;
+  		-moz-opacity: 1;
+  		opacity: 1;
+	}
+	.demo-pricing-1:active {
+		box-shadow: 0px 10px 0px 0px #3293ba;
+		-webkit-opacity: 0.25;
+  		-moz-opacity: 0.25;
+  		opacity: 0.25;
+	}
+
+	body { transition: background-color 0.2s ease; }
+	body {text-align: center}
+
 body { transition: background-color 0.2s ease; }
 </style>
+
+
 
 </head>
 <body>
 
 
-<button onclick="toggleLiveInput()">use live input</button>
-<button onclick="showMax()">show max value</button>
-
-<div class="num"><span id="num">--</span></div>   
-<div class="val"><span id="val">--</span></div>  
+<a id="liveButton" onclick="toggleLiveInput()" class="demo-pricing demo-pricing-1">Show pretty colors</a>
 
 <canvas id="output" width=300 height=42></canvas>
 </body>

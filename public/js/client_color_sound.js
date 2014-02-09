@@ -1,7 +1,5 @@
 var audioContext = new AudioContext();
 var analyser = null;
-var numElem;
-var valElem;
 var confidence = 0;
 var maxVal = 0;
 var ampVals = new Array();
@@ -11,8 +9,6 @@ var ampAvg = 0;
 var ampArrSize = 50;
 
 window.onload = function() {
-	numElem = document.getElementById( "num" );
-	valElem = document.getElementById("val");
 }
 
 function error() {
@@ -104,12 +100,6 @@ function updateAmp( time ) {
 	analyser.getByteTimeDomainData( buf );
 	autoCorrelate( buf, audioContext.sampleRate );
 
-	if (confidence > maxVal){
-		maxVal = confidence;
-	}
-
-	numElem.innerHTML = confidence;
-
 	if (ampVals.length < ampArrSize){
 		ampVals.push(confidence);
 		if (ampVals.length == 1)
@@ -117,6 +107,7 @@ function updateAmp( time ) {
 
 		if (ampVals.length == ampArrSize - 1)
 			console.log("Finished filling array. Beginning data push.");
+			$("#liveButton").fadeOut();
 	}
 	else {
 		ampSum -= ampVals[currentAmpElement]
@@ -137,10 +128,6 @@ function updateAmp( time ) {
 	rafID = window.requestAnimationFrame( updateAmp );
 }
 
-function showMax(){
-	valElem.innerText = maxVal;
-}
-
 function getParameterByName(name) {
     name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
     var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
@@ -150,7 +137,7 @@ function getParameterByName(name) {
 
 function pushUsefulValOf( avg ){
 
-	n = 2000;
+	n = 1500;
 	if (avg < (10000-n)) {
 		avg *= 1.2;
 		avg += n;
