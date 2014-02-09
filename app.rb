@@ -20,6 +20,8 @@ def hex_color(red, green, blue)
 end
 
 def color_from_redis
+  response.headers['Access-Control-Allow-Origin'] = '*'
+  response.headers['Access-Control-Allow-Method'] = 'POST'
   red = REDIS.get "red"
   green = REDIS.get "green"
   blue = REDIS.get "blue"
@@ -27,39 +29,55 @@ def color_from_redis
 end
 
 get '/' do
+  response.headers['Access-Control-Allow-Origin'] = '*'
+  response.headers['Access-Control-Allow-Method'] = 'POST'
   color_from_redis
 end
 
 get '/colorSound' do
+  response.headers['Access-Control-Allow-Origin'] = '*'
+  response.headers['Access-Control-Allow-Method'] = 'POST'
   send_file File.join(settings.public_folder, '/index.html')
 end
 
 post '/red' do
+  response.headers['Access-Control-Allow-Origin'] = '*'
+  response.headers['Access-Control-Allow-Method'] = 'POST'
   REDIS.set "red", params[:value]
   color_from_redis
 end
 
 post '/green' do
+  response.headers['Access-Control-Allow-Origin'] = '*'
+  response.headers['Access-Control-Allow-Method'] = 'POST'
   REDIS.set "green", params[:value]
   color_from_redis
 end
 
 post '/blue' do
+  response.headers['Access-Control-Allow-Origin'] = '*'
+  response.headers['Access-Control-Allow-Method'] = 'POST'
   REDIS.set "blue", params[:value]
   color_from_redis
 end
 
 get '/red' do
+  response.headers['Access-Control-Allow-Origin'] = '*'
+  response.headers['Access-Control-Allow-Method'] = 'POST'
   REDIS.set "red", params[:value]
   color_from_redis
 end
 
 get '/green' do
+  response.headers['Access-Control-Allow-Origin'] = '*'
+  response.headers['Access-Control-Allow-Method'] = 'POST'
   REDIS.set "green", params[:value]
   color_from_redis
 end
 
 get '/blue' do
+  response.headers['Access-Control-Allow-Origin'] = '*'
+  response.headers['Access-Control-Allow-Method'] = 'POST'
   REDIS.set "blue", params[:value]
   color_from_redis
 end
