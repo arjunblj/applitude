@@ -12,7 +12,7 @@ end
 
 before do
   response.headers['Access-Control-Allow-Origin'] = '*'
-  response.headers['Access-Control-Allow-Method'] = 'POST'
+  response.headers['Access-Control-Allow-Method'] = 'POST, GET'
 end
 
 def hex_color(red, green, blue)
