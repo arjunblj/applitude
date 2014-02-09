@@ -10,6 +10,11 @@ configure do
   REDIS = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
 end
 
+before do
+  response.headers['Access-Control-Allow-Origin'] = '*'
+  response.headers['Access-Control-Allow-Method'] = 'POST'
+end
+
 def hex_color(red, green, blue)
   "#%02x%02x%02x" % [red.to_i, green.to_i, blue.to_i]
 end
@@ -19,7 +24,6 @@ def color_from_redis
   green = REDIS.get "green"
   blue = REDIS.get "blue"
   @color = hex_color(red, green, blue)
-  erb :index
 end
 
 get '/' do

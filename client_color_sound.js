@@ -8,7 +8,7 @@ var ampVals = new Array();
 var currentAmpElement = 0;
 var ampSum = 0;
 var ampAvg = 0;
-var ampArrSize = 100;
+var ampArrSize = 50;
 
 window.onload = function() {
 	numElem = document.getElementById( "num" );
@@ -115,7 +115,7 @@ function updateAmp( time ) {
 		if (ampVals.length == 1)
 			console.log("Filling array...");
 
-		if (ampVals.length == 99)
+		if (ampVals.length == ampArrSize - 1)
 			console.log("Finished filling array. Beginning data push.");
 	}
 	else {
@@ -141,13 +141,27 @@ function showMax(){
 	valElem.innerText = maxVal;
 }
 
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
 function pushUsefulValOf( avg ){
 
-	var pushVal = (avg*255/10000);
-	var url = "";
+	n = 2000;
+	if (avg < (10000-n)) {
+		avg *= 1.2;
+		avg += n;
+	}
+	var pushVal = (avg * 255/10000);
+	var url = "http://localhost:4567/";
 
-	$.ajax({
-
+	$.post( url + getParameterByName("client"), {value : pushVal}, function(data) {
+		$("body").css("background-color", data);
+		console.log(data, $("body").css("background-color"));
 	});
-	
-}
+
+	console.log("POSTed value of " + pushVal);
+}	
