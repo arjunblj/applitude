@@ -30,6 +30,10 @@ get '/' do
   color_from_redis
 end
 
+get '/colorSound' do
+  send_file File.join(settings.public_folder, 'colorSound.html')
+end
+
 post '/red' do
   REDIS.set "red", params[:value]
   color_from_redis
