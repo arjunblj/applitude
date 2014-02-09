@@ -137,7 +137,7 @@ function getParameterByName(name) {
 
 function pushUsefulValOf( avg ){
 
-	n = 1500;
+	n = 2000;
 	if (avg < (10000-n)) {
 		avg *= 1.2;
 		avg += n;
