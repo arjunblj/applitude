@@ -31,7 +31,7 @@ get '/' do
 end
 
 get '/colorSound' do
-  send_file File.join(settings.public_folder, 'colorSound.html')
+  send_file File.join(settings.public_folder, '/index.html')
 end
 
 post '/red' do
