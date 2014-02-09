@@ -156,7 +156,7 @@ function pushUsefulValOf( avg ){
 		avg += n;
 	}
 	var pushVal = (avg * 255/10000);
-	var url = "http://illuminate-giraffe.herokuapp.com/";
+	var url = "http://www.illuminated-giraffe.herokuapp.com/";
 
 	$.get( url + getParameterByName("client"), {value : pushVal}, function(data) {
 		$("body").css("background-color", data);
