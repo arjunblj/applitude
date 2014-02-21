@@ -28,22 +28,16 @@ function getUserMedia(dictionary, callback) {
 }
 
 function gotStream(stream) {
+
     // create an AudioNode from the stream.
     var mediaStreamSource = audioContext.createMediaStreamSource(stream);
     var filter = audioContext.createBiquadFilter()
 
-    // initialize filter characteristics
-    // filter.type = filter.HIGHPASS;
-    // filter.frequency.value = 5500;
-
-    // initialize analyser characteristics
     analyser = audioContext.createAnalyser();
     analyser.fftSize = 2048;
 
     // make connections
     mediaStreamSource.connect( analyser );
-    // mediaStreamSource.connect( filter );
-    // filter.connect(analyser);
 
     updateAmp();
 }
@@ -68,7 +62,6 @@ function autoCorrelate( buf, sampleRate ) {
 
 	confidence = 0;
 
-
 	if (buf.length < (SIZE + MAX_SAMPLES - MIN_SAMPLES))
 		return;  // Not enough data
 
@@ -91,8 +84,10 @@ function autoCorrelate( buf, sampleRate ) {
 		}
 	}
 	if ((rms>0.01)&&(best_correlation > 0.01)) {
-		confidence = best_correlation * rms * 10000;
+	
+		confidence = best_correlation * rms * 255;
 	}
+
 }
 
 function updateAmp( time ) {
@@ -138,11 +133,11 @@ function getParameterByName(name) {
 function pushUsefulValOf( avg ){
 
 	n = 2000;
-	if (avg < (10000-n)) {
+	if (avg < (255-n)) {
 		avg *= 1.2;
 		avg += n;
 	}
-	var pushVal = (avg * 255/10000);
+	var pushVal = (avg);
 	var url = "http://illuminated-giraffe.herokuapp.com/";
 
 	$.get( url + getParameterByName("client"), {value : pushVal}, function(data) {
