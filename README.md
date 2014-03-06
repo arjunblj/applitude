@@ -14,6 +14,10 @@ Open up three browsers and point them to one of:
 
 Grant access to device mic ... success!
 
+The background color of each browser window will change based on the volume of noise near the red, blue, and green computers. Move around among the three devices while making noise. Be sure to separate them enough that noise near one device will not be noticed substantially by the others. Enjoy! 
+
+Note: Applitude has been tested to run in Google Chrome on OSX.
+
 ## installing
 
 You'll need Redis and Sinatra and you should be able to get them w/ Bundle install after cloning, so try:
